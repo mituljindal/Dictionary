@@ -26,11 +26,14 @@ function jsonParsing(jsonObject) {
   if (jsonObject.hasOwnProperty('results')) {
     var results = jsonObject.results;
   }
-
+  var type = new Array();
   var senses = new Array();
   for(var i =0; i < results.length; i++) {
     if (results[i].hasOwnProperty('senses')) {
       senses.push(results[i].senses);
+    }
+    if (results[i].hasOwnProperty('part_of_speech')) {
+      type.push(results[i].part_of_speech);
     }
   }
 
@@ -45,7 +48,11 @@ function jsonParsing(jsonObject) {
 
   let defString = '';
   for(var i = 0; i < definition.length; i++) {
-      defString += definition[i] + '<br /><br/>';
+    var string = ''
+    string = jsUcfirst(String(definition[i]));
+    console.log(typeof string)
+    string = string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    defString += string + '<br /><br/>';
   }
   document.getElementById('spinner').hidden = 'hidden';
   document.getElementById('jumbo').hidden = '';
@@ -61,3 +68,8 @@ word.addEventListener("keydown", function(e) {
     search();
   }
 });
+
+function jsUcfirst(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
