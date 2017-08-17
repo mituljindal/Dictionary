@@ -1,6 +1,7 @@
 function search() {
 
   document.getElementById('jumbo').hidden = 'hidden';
+  document.getElementById('spinner').hidden = '';
   var x = document.getElementById('word')
   var word = x.value;
 
@@ -38,10 +39,11 @@ function jsonParsing(jsonObject) {
 
   let defString = '';
   for(var i = 0; i < definition.length; i++) {
-    if (definition[i] != undefined) {
+    //if (definition[i] != undefined) {
       defString += definition[i] + '<br /><br/>';
-    }
+    //}
   }
+  document.getElementById('spinner').hidden = 'hidden';
   document.getElementById('jumbo').hidden = '';
   var textSpace = document.getElementById("textSpace");
   textSpace.innerHTML = defString;
