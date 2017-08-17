@@ -23,25 +23,29 @@ function search() {
 
 function jsonParsing(jsonObject) {
 
-  console.log(jsonObject);
+  if (jsonObject.hasOwnProperty('results')) {
+    var results = jsonObject.results;
+  }
+
   var senses = new Array();
-  for(var i =0; i < jsonObject.results.length; i++) {
-    senses.push(jsonObject.results[i].senses);
+  for(var i =0; i < results.length; i++) {
+    if (results[i].hasOwnProperty('senses')) {
+      senses.push(results[i].senses);
+    }
   }
 
   var definition = new Array();
   for (var i = 0; i < senses.length; i++) {
-    console.log(senses[i].length);
     for(var j = 0; j < senses[i].length; j++) {
-      definition.push(senses[i][j].definition);
+      if(senses[i][j].hasOwnProperty('definition')) {
+        definition.push(senses[i][j].definition);
+      }
     }
   }
 
   let defString = '';
   for(var i = 0; i < definition.length; i++) {
-    //if (definition[i] != undefined) {
       defString += definition[i] + '<br /><br/>';
-    //}
   }
   document.getElementById('spinner').hidden = 'hidden';
   document.getElementById('jumbo').hidden = '';
