@@ -14,14 +14,14 @@ function search() {
     if (this.readyState == 4 && this.status == 200) {
       var obj=this.responseText;
       var jsonFile = JSON.parse(obj);
-      jsonParsing(jsonFile, word);
+      jsonParsing(jsonFile);
     }
   };
   xhr.open("GET", url, true);
   xhr.send();
 }
 
-function jsonParsing(jsonObject, word) {
+function jsonParsing(jsonObject) {
 
   console.log(jsonObject);
 
